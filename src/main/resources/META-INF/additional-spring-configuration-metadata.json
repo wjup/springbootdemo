@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.thymeleaf.redis.database",
+      "type": "java.lang.String",
+      "description": "Description for spring.thymeleaf.redis.database."
+  }
+] }

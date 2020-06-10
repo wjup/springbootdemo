@@ -1,0 +1,62 @@
+#################################### common config : ####################################
+server:
+  port: 5678
+  servlet:
+    context-path: /wjup
+
+spring:
+  datasource:
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: utf-8
+    mode: html
+    servlet:
+      content-type: text/html
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      password:
+      jedis:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+      # 设置客户端连接时的超时时间，单位为秒。当客户端在这段时间内没有发出任何指令，那么关闭该连接
+      timeout: 21600
+      # 上传文件的大小限制
+      # maxFileSize 是单个文件大小
+      # maxRequestSize是设置总上传的数据大小
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 20MB
+  # 发送邮件邮箱设置
+  mail:
+    host: smtp.126.com
+    username: 0@126.com
+    password: 0
+    default-encoding: UTF-8
+  # 数据库版本管理工具
+  flyway:
+    enabled: true
+    # 禁止清理数据库表
+    clean-disabled: true
+    # 如果数据库不是空表，需要设置成 true，否则启动报错
+    baseline-on-migrate: true
+    # 与 baseline-on-migrate: true 搭配使用
+    baseline-version: 0
+
+# 发送账号
+mail:
+  fromMail:
+    addr: wangjieinspur@126.com
+
+api.data: hello-api
