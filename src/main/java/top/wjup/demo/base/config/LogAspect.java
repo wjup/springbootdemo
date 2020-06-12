@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 /**
  * @author wjup
- *
+ * <p>
  * 请求日志打印
  */
 @Aspect
@@ -29,14 +29,15 @@ public class LogAspect {
     public void deBefore(JoinPoint joinPoint) throws Throwable {
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        log.info("--------------------------------------------------");
-        log.info("【请求地址】: " + request.getRequestURL().toString());
-        log.info("【请求类型】 : " + request.getMethod());
-        log.info("【请求入参】 : " + Arrays.toString(joinPoint.getArgs()));
-        log.info("【请求者IP】 : " + request.getRemoteAddr());
-        log.info("【响应方法】 : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-
+        if (attributes != null) {
+            HttpServletRequest request = attributes.getRequest();
+            log.info("--------------------------------------------------");
+            log.info("【请求地址】: " + request.getRequestURL().toString());
+            log.info("【请求类型】 : " + request.getMethod());
+            log.info("【请求入参】 : " + Arrays.toString(joinPoint.getArgs()));
+            log.info("【请求者IP】 : " + request.getRemoteAddr());
+            log.info("【响应方法】 : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        }
     }
 
     @AfterReturning(returning = "ret", pointcut = "webLog()")

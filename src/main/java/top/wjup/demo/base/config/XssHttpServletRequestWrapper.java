@@ -116,8 +116,8 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
             if (paramValue.length() > keyword.length() + 4
                     && (paramValue.contains(" " + keyword) || paramValue.contains(keyword + " ") || paramValue.contains(" " + keyword + " "))) {
                 paramValue = StringUtils.replace(paramValue, keyword, replacedString);
-                log.error(this.currentUrl + "已被过滤，因为参数中包含不允许sql的关键词(" + keyword
-                        + ")" + ";参数：" + value + ";过滤后的参数：" + paramValue);
+                log.error("【存在sql注入url】：" + this.currentUrl + "\n危险入参关键字】：" + keyword
+                        + ")" + ";\n【全部参数】：" + value + ";\n【过滤后的参数】：" + paramValue);
             }
         }
         return paramValue;
