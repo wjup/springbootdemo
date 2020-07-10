@@ -18,22 +18,22 @@ spring:
     mode: html
     servlet:
       content-type: text/html
-    redis:
-      database: 0
-      host: localhost
-      port: 6379
-      password:
-      jedis:
-        pool:
-          max-active: 8
-          max-wait: -1ms
-          max-idle: 8
-          min-idle: 0
-      # 设置客户端连接时的超时时间，单位为秒。当客户端在这段时间内没有发出任何指令，那么关闭该连接
-      timeout: 21600
-      # 上传文件的大小限制
-      # maxFileSize 是单个文件大小
-      # maxRequestSize是设置总上传的数据大小
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    # 设置客户端连接时的超时时间，单位为秒。当客户端在这段时间内没有发出任何指令，那么关闭该连接
+    timeout: 21600
+    # 上传文件的大小限制
+    # maxFileSize 是单个文件大小
+    # maxRequestSize是设置总上传的数据大小
   servlet:
     multipart:
       max-file-size: 5MB
@@ -53,10 +53,21 @@ spring:
     baseline-on-migrate: true
     # 与 baseline-on-migrate: true 搭配使用
     baseline-version: 0
-
-# 发送账号
-mail:
-  fromMail:
-    addr: wangjieinspur@126.com
+  rabbitmq:
+    host: 192.168.128.134
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+    listener:
+      simple:
+        # 消费者最大数量
+        max-concurrency: 10
+        # 消费者数量
+        concurrency: 10
+        # 消费，每次从队列中取多少个,取多了，可能处理不过来
+        prefetch: 1
+        # 消费失败的数据重新压入队列
+        default-requeue-rejected: true
 
 api.data: hello-api
